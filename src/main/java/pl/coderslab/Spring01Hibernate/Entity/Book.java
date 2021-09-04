@@ -23,6 +23,16 @@ public class Book {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", rating=" + rating +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
