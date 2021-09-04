@@ -1,6 +1,8 @@
 package pl.coderslab.Spring01Hibernate.Entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="books")
@@ -13,7 +15,14 @@ public class Book {
     private int rating;
     private String description;
 
-    public Book() {
+
+    @ManyToMany
+    public List<Author> list = new ArrayList<>();
+
+    @ManyToOne
+    private Publisher publisher;
+
+        public Book() {
     }
 
     public Book(Long id, String title, int rating, String description) {
@@ -21,6 +30,7 @@ public class Book {
         this.title = title;
         this.rating = rating;
         this.description = description;
+
     }
 
     @Override
@@ -30,7 +40,16 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
+                ", publisher=" + publisher +
                 '}';
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     public Long getId() {

@@ -33,9 +33,9 @@ public class AuthorController {
 
     @RequestMapping("/author/update/{id}/{lastName}")
     @ResponseBody
-    public String updateAuthor (@PathVariable Long id, @PathVariable String title){
+    public String updateAuthor (@PathVariable Long id, @PathVariable String name){
         Author author = authorDao.findById(id);
-        author.setLastName(title);
+        author.setLastName(name);
         authorDao.update(author);
         return author.toString();
     }

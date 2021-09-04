@@ -1,6 +1,9 @@
 package pl.coderslab.Spring01Hibernate.Entity;
 
+import org.hibernate.mapping.List;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name="authors")
@@ -11,13 +14,14 @@ public class Author {
     private String firstName;
     private String lastName;
 
-    public Author() {
-    }
-
     public Author(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+
+    }
+
+    public Author() {
     }
 
     @Override

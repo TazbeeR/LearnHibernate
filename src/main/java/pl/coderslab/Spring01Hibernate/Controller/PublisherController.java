@@ -19,7 +19,7 @@ public class PublisherController {
     @ResponseBody
     public String addPublisher(){
         Publisher publisher = new Publisher();
-        publisher.setName("Heniek");
+        publisher.setName("PWN");
         publisherDao.savePublisher(publisher);
         return "Id dodanego wydawcy: " + publisher.getId();
     }
@@ -33,9 +33,9 @@ public class PublisherController {
 
     @RequestMapping("/publisher/update/{id}/{name}")
     @ResponseBody
-    public String updatePublisher (@PathVariable Long id, @PathVariable String title){
+    public String updatePublisher (@PathVariable Long id, @PathVariable String name){
         Publisher publisher = publisherDao.findById(id);
-        publisher.setName(title);
+        publisher.setName(name);
         publisherDao.update(publisher);
         return publisher.toString();
     }

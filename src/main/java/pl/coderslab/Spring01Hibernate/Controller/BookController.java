@@ -5,14 +5,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.Spring01Hibernate.Dao.BookDao;
+import pl.coderslab.Spring01Hibernate.Dao.PublisherDao;
+import pl.coderslab.Spring01Hibernate.Entity.Author;
 import pl.coderslab.Spring01Hibernate.Entity.Book;
+import pl.coderslab.Spring01Hibernate.Entity.Publisher;
 
 @Controller
 public class BookController {
     private final BookDao bookDao;
+    private final PublisherDao publisherDao;
 
-    public BookController(BookDao bookDao) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao)
+    {
         this.bookDao = bookDao;
+        this.publisherDao = publisherDao;
     }
 
     @RequestMapping("/test")
@@ -24,10 +30,17 @@ public class BookController {
     @RequestMapping("/book/add")
     @ResponseBody
     public String addBook() {
+//        zmodyfikować kontroler
+
+        Publisher publisher = new Publisher();
+        publisher.setName("PWN");
+        publisherDao.savePublisher(publisher);
+
         Book book = new Book();
         book.setTitle("Thinking in Java");
         book.setRating(10);
         book.setDescription("Krótki opis książki");
+        book.setPublisher(publisher);
         bookDao.saveBook(book);
         return "Id dodanej książki to:"
                 + book.getId();
