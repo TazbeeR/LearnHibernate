@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.Spring01Hibernate.Dao.AuthorDao;
 import pl.coderslab.Spring01Hibernate.Dao.BookDao;
 import pl.coderslab.Spring01Hibernate.Dao.PublisherDao;
 import pl.coderslab.Spring01Hibernate.Entity.Author;
@@ -14,11 +15,13 @@ import pl.coderslab.Spring01Hibernate.Entity.Publisher;
 public class BookController {
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
+    private final AuthorDao authorDao;
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao)
+    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao)
     {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
+        this.authorDao = authorDao;
     }
 
     @RequestMapping("/test")
@@ -27,10 +30,24 @@ public class BookController {
         return "to żyje";
     }
 
+    @RequestMapping("/book/zad2")
+    @ResponseBody
+    public String zad2 (){
+        Author author1 = authorDao.findById(1L);
+        Author author2 = authorDao.findById(2l);
+        Book book1 = bookDao.findById(1l);
+        book1.setAuthor(author1);
+        bookDao.saveBook(book1);
+        book1.setAuthor(author2);
+        bookDao.saveBook(book1);
+
+        return "it's done";
+    }
+
+
     @RequestMapping("/book/add")
     @ResponseBody
     public String addBook() {
-//        zmodyfikować kontroler
 
         Publisher publisher = new Publisher();
         publisher.setName("PWN");
