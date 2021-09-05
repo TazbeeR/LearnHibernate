@@ -10,6 +10,8 @@ import pl.coderslab.Spring01Hibernate.Dao.PublisherDao;
 import pl.coderslab.Spring01Hibernate.Entity.Author;
 import pl.coderslab.Spring01Hibernate.Entity.Book;
 import pl.coderslab.Spring01Hibernate.Entity.Publisher;
+
+import javax.persistence.Query;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,13 +36,13 @@ public class BookController {
 
     @RequestMapping("/book/zad2")
     @ResponseBody
+
+//    Poprawic
     public String zad2 (){
         Author author1 = authorDao.findById(1L);
         Author author2 = authorDao.findById(2l);
         Book book1 = bookDao.findById(1l);
-        book1.setAuthor(author1);
-        bookDao.saveBook(book1);
-        book1.setAuthor(author2);
+
         bookDao.saveBook(book1);
 
         return "it's done";
@@ -111,5 +113,14 @@ public class BookController {
                 .map(Book::getTitle)
                 .collect(Collectors.joining("<br />"));
     }
+    @RequestMapping("/publisher/{id}")
+    @ResponseBody
+    public String tessst(@PathVariable Publisher id){
+        List<Book> allBooks = bookDao.findAllByPublisher(id);
+        return allBooks.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br />"));
+    }
+
 
 }

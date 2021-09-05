@@ -14,8 +14,6 @@ public class Book {
     private String title;
     private int rating;
     private String description;
-    @ManyToOne
-    private Author author;
 
     @ManyToMany
     public List<Author> list = new ArrayList<>();
@@ -34,15 +32,7 @@ public class Book {
 
     }
 
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public List<Author> getList() {
+      public List<Author> getList() {
         return list;
     }
 
@@ -57,7 +47,6 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
-                ", author=" + author +
                 ", list=" + list +
                 ", publisher=" + publisher +
                 '}';
