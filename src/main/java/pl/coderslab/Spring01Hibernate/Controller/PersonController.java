@@ -1,8 +1,7 @@
 package pl.coderslab.Spring01Hibernate.Controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.Spring01Hibernate.Dao.PersonDao;
 import pl.coderslab.Spring01Hibernate.Entity.Person;
 import pl.coderslab.Spring01Hibernate.Entity.PersonDetails;
@@ -14,6 +13,30 @@ public class PersonController {
 
     public PersonController(PersonDao personDao) {
         this.personDao = personDao;
+    }
+
+    @GetMapping("/person/form")
+    public String test1(){
+        return "personform";
+    }
+
+    @PostMapping("/person/form")
+    @ResponseBody
+    public String save(@RequestParam String login,
+                       @RequestParam String email,
+                       @RequestParam String password) {
+        Person person = new Person();
+        person.setLogin(login);
+        person.setEmail(email);
+        person.setPassword(password);
+        personDao.persist(person);
+
+        return "udało sie";
+    }
+
+    @GetMapping("/person/test")
+    public String test (){
+        return "index";
     }
 
     @RequestMapping("/person/persist")
