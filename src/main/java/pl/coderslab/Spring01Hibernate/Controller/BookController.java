@@ -11,7 +11,6 @@ import pl.coderslab.Spring01Hibernate.Entity.Author;
 import pl.coderslab.Spring01Hibernate.Entity.Book;
 import pl.coderslab.Spring01Hibernate.Entity.Publisher;
 
-import javax.persistence.Query;
 import java.util.List;
 import java.util.stream.Collectors;
 

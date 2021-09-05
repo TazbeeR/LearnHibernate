@@ -17,8 +17,8 @@ public class Student {
    private String country;
    private String notes;
    private boolean mailingList;
-   private List<Skill> programmingSkills;
-   private List <Hobby>hobbies;
+   private List<String> programmingSkills;
+   private List <String>hobbies;
 
 
 }

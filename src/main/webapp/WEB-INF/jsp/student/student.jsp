@@ -14,8 +14,10 @@
     Notatka: <form:textarea path="notes"/><br />
     Chcę otrzymywać powiadomienia
     <form:checkbox path="mailingList"/><br />
-    <form:select path="programmingSkills" items="${skills}"  multiple="true"/><br />
-    <form:checkboxes path="hobby" items="${hobbies}"/><br />
+    Umiejętności:
+    <form:select path="programmingSkills" items="${skills}"  multiple="true" /><br />
+    Hobby:
+    <form:checkboxes path="hobbies" items="${hobbies}"/><br />
 
 
 
