@@ -8,6 +8,9 @@ import pl.coderslab.Spring01Hibernate.Dao.AuthorDao;
 import pl.coderslab.Spring01Hibernate.Entity.Author;
 import pl.coderslab.Spring01Hibernate.Entity.Book;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 public class AuthorController {
     private final AuthorDao authorDao;
@@ -45,5 +48,13 @@ public class AuthorController {
         Author author = authorDao.findById(id);
         authorDao.delete(author);
         return "Autor został usunięty";
+    }
+    @RequestMapping("/author/all")
+    @ResponseBody
+    public String findAll(){
+        List<Author> allAuthors = authorDao.findAll();
+        return allAuthors.stream()
+                .map(Author::getLastName)
+                .collect(Collectors.joining("<br />"));
     }
 }

@@ -1,9 +1,6 @@
 package pl.coderslab.Spring01Hibernate.Entity;
 
-import org.hibernate.mapping.List;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 
 @Entity
 @Table(name="authors")

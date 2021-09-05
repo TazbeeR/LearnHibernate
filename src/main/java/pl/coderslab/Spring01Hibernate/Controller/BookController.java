@@ -10,6 +10,8 @@ import pl.coderslab.Spring01Hibernate.Dao.PublisherDao;
 import pl.coderslab.Spring01Hibernate.Entity.Author;
 import pl.coderslab.Spring01Hibernate.Entity.Book;
 import pl.coderslab.Spring01Hibernate.Entity.Publisher;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookController {
@@ -84,6 +86,30 @@ public class BookController {
         Book book = bookDao.findById(id);
         bookDao.delete(book);
         return "Książka została usunięta";
+    }
+    @RequestMapping("/book/all")
+    @ResponseBody
+    public String findAll(){
+        List<Book> allBooks = bookDao.findAll();
+        return allBooks.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br />"));
+    }
+    @RequestMapping("/book/rating/{rating}")
+    @ResponseBody
+    public String findAllByRating(@PathVariable int rating){
+        List<Book> allBooksByRating = bookDao.findAllByRating(rating);
+        return allBooksByRating.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br />"));
+    }
+    @RequestMapping("/book/publisher")
+    @ResponseBody
+    public String findAllExist(){
+        List<Book> allBooks = bookDao.findAllByExistingPublisher();
+        return allBooks.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br />"));
     }
 
 }
