@@ -1,10 +1,12 @@
 package pl.coderslab.Spring01Hibernate.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.Spring01Hibernate.Dao.PersonDao;
 import pl.coderslab.Spring01Hibernate.Entity.Person;
 import pl.coderslab.Spring01Hibernate.Entity.PersonDetails;
+import pl.coderslab.Spring01Hibernate.Entity.Student;
 
 @Controller
 public class PersonController {
@@ -16,7 +18,8 @@ public class PersonController {
     }
 
     @GetMapping("/person/form")
-    public String test1(){
+    public String test1(Model model){
+        model.addAttribute("person" , new Person());
         return "personform";
     }
 
@@ -55,9 +58,7 @@ public class PersonController {
         person.setPassword("test123");
         person.setPersonDetails(personDetails);
 
-
         personDao.persist(person);
-
 
         return "Jest sukces!";
     }
