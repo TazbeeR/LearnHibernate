@@ -20,8 +20,7 @@ public class BookController {
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao)
-    {
+    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
@@ -37,12 +36,21 @@ public class BookController {
     @ResponseBody
 
 //    Poprawic
-    public String zad2 (){
-        Author author1 = authorDao.findById(1L);
-        Author author2 = authorDao.findById(2l);
-        Book book1 = bookDao.findById(1l);
+    public String zad2() {
+        Publisher publisher = new Publisher();
+        publisher.setName("Wydawnictwo HELION");
+        publisherDao.savePublisher(publisher);
 
-        bookDao.saveBook(book1);
+        Author firstAuthor = authorDao.findById(1l);
+        Author secondAuthor = authorDao.findById(2l);
+
+        Book book = new Book();
+        book.setTitle("Władca pierścieni");
+        book.setRating(4);
+        book.setDescription("Książka o handlarzu pierścieniami");
+        book.setPublisher(publisher);
+        book.getAuthorList().add(firstAuthor);
+        book.getAuthorList().add(secondAuthor);
 
         return "it's done";
     }
@@ -75,46 +83,51 @@ public class BookController {
 
     @RequestMapping("/book/update/{id}/{title}")
     @ResponseBody
-    public String updateBook (@PathVariable Long id, @PathVariable String title){
+    public String updateBook(@PathVariable Long id, @PathVariable String title) {
         Book book = bookDao.findById(id);
         book.setTitle(title);
         bookDao.update(book);
         return book.toString();
     }
+
     @RequestMapping("/book/delete/{id}")
     @ResponseBody
-    public String deleteBook (@PathVariable Long id){
+    public String deleteBook(@PathVariable Long id) {
         Book book = bookDao.findById(id);
         bookDao.delete(book);
         return "Książka została usunięta";
     }
+
     @RequestMapping("/book/all")
     @ResponseBody
-    public String findAll(){
+    public String findAll() {
         List<Book> allBooks = bookDao.findAll();
         return allBooks.stream()
                 .map(Book::getTitle)
                 .collect(Collectors.joining("<br />"));
     }
+
     @RequestMapping("/book/rating/{rating}")
     @ResponseBody
-    public String findAllByRating(@PathVariable int rating){
+    public String findAllByRating(@PathVariable int rating) {
         List<Book> allBooksByRating = bookDao.findAllByRating(rating);
         return allBooksByRating.stream()
                 .map(Book::getTitle)
                 .collect(Collectors.joining("<br />"));
     }
+
     @RequestMapping("/book/publisher")
     @ResponseBody
-    public String findAllExist(){
+    public String findAllExist() {
         List<Book> allBooks = bookDao.findAllByExistingPublisher();
         return allBooks.stream()
                 .map(Book::getTitle)
                 .collect(Collectors.joining("<br />"));
     }
+
     @RequestMapping("/publisher/{id}")
     @ResponseBody
-    public String tessst(@PathVariable Publisher id){
+    public String tessst(@PathVariable Publisher id) {
         List<Book> allBooks = bookDao.findAllByPublisher(id);
         return allBooks.stream()
                 .map(Book::getTitle)

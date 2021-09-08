@@ -58,10 +58,10 @@ public class BookDao {
     public List<Book> findAllByAuthor(Author author) {
         long authorId = author.getId();
 
-        Query query = entityManager.createQuery("select b from Book b join b.list a where a = :auth");
+        Query query = entityManager.createQuery("select b from Book b join b.authorList a where a = :auth");
         query.setParameter("auth", author);
 
-        Query query2 = entityManager.createQuery("select b from Book b join b.list a where a.id = :authorId");
+        Query query2 = entityManager.createQuery("select b from Book b join b.authorList a where a.id = :authorId");
         query2.setParameter("authorId", authorId);
 
         return query.getResultList();

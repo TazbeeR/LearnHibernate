@@ -1,5 +1,9 @@
 package pl.coderslab.Spring01Hibernate.Controller.FormController;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +16,9 @@ import pl.coderslab.Spring01Hibernate.Entity.Publisher;
 
 
 import java.util.List;
-
+@Getter
+@Setter
+@AllArgsConstructor
 @Controller
 public class BookFormController {
 
@@ -20,11 +26,6 @@ public class BookFormController {
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
 
-    public BookFormController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
-        this.bookDao = bookDao;
-        this.publisherDao = publisherDao;
-        this.authorDao = authorDao;
-    }
 
     @ModelAttribute("publishers")
     public List<Publisher> allPublishers() {

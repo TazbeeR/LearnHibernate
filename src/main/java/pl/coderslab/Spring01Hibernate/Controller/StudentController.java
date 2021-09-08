@@ -12,10 +12,11 @@ import java.util.List;
 public class StudentController {
 
     @GetMapping("/student")
-    public String landingPage (Model model){
+    public String landingPage(Model model) {
         model.addAttribute("student", new Student());
         return "student/student";
     }
+
     @ModelAttribute("countries")
     public List<String> countries() {
         return Arrays.asList("Poland", "Germany", "France", "Russia", "Denmark");
@@ -25,12 +26,14 @@ public class StudentController {
     public List<String> skills() {
         return Arrays.asList("Java", "PHP", "Ruby");
     }
-        @ModelAttribute("hobbies")
-        public List<String> hobbys(){
+
+    @ModelAttribute("hobbies")
+    public List<String> hobbys() {
         return Arrays.asList("koszykówka", "ping pong", "bierki");
-        }
+    }
+
     @PostMapping("/student")
-    public String saveStudent (@ModelAttribute Student student, Model model) {
+    public String saveStudent(@ModelAttribute Student student, Model model) {
         model.addAttribute("student", student);
         return "student/summary";
     }

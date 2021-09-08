@@ -1,9 +1,16 @@
 package pl.coderslab.Spring01Hibernate.Entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name="books")
 public class Book {
@@ -16,79 +23,9 @@ public class Book {
     private String description;
 
     @ManyToMany
-    public List<Author> list = new ArrayList<>();
+    public List<Author> authorList = new ArrayList<>();
 
     @ManyToOne
     private Publisher publisher;
-
-        public Book() {
-    }
-
-    public Book(Long id, String title, int rating, String description) {
-        this.id = id;
-        this.title = title;
-        this.rating = rating;
-        this.description = description;
-
-    }
-
-      public List<Author> getList() {
-        return list;
-    }
-
-    public void setList(List<Author> list) {
-        this.list = list;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", rating=" + rating +
-                ", description='" + description + '\'' +
-                ", list=" + list +
-                ", publisher=" + publisher +
-                '}';
-    }
-
-    public Publisher getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
+
