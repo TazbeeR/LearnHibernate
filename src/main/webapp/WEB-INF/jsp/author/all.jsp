@@ -2,16 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:forEach items="${allBooks}" var="book">
-    <br/>
+<c:forEach items="${allAuthors}" var="author">
+    <br />
     --------------------------------
-    <br/>
-    ${book.title}<br/>
-    ${book.description}<br/>
-    <br/>
-    <a href="edit?idToEdit=${book.id}">Edytuj </a>
-    <a href="remove?toRemoveId=${book.id}">Usuń </a>
-    <br/>
+    <br />
+    ${author.firstName}<br />
+    ${author.lastName}<br />
+    <br />
+    <a href="edit?idToEdit=${author.id}">Edytuj </a>
+    <a href="remove?toRemoveId=${author.id}">Usuń </a>
+    <br />
     --------------------------------
-    <br/>
+    <br />
 </c:forEach>

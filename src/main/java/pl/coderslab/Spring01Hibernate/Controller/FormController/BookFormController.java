@@ -2,7 +2,6 @@ package pl.coderslab.Spring01Hibernate.Controller.FormController;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +15,7 @@ import pl.coderslab.Spring01Hibernate.Entity.Publisher;
 
 
 import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -81,6 +81,4 @@ public class BookFormController {
         }
         return "redirect:/bookForm/list";
     }
-
-
 }
